@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+# Regular Expressions examples by counsellors
+import re
+
+m = re.match('pattern','some words for pattern')
+if m is not None:
+    print m.group()
+
+m = re.search('pattern','some words for pattern')
+if m is not None: print m.group()
+
+bt = 'bat|bet|bit'  #RE pattern: bat,bet,bit
+m = re.match(bt,'bat')
+if m is not None: m.grpoup()
+
+m = re.match('(\w\w\w)'-'\d\d\d','abc-123')
+print m.group()  # entire match such as 'abc-123'
+print m.group(1) # subgroup 1 such as 'abc'
+print m.group(2) # subgroup 2 such as '123'
+print m.groups() # all subgroups such as ('abc','123')
+
+print re.findall('car','car') # ['car']
+print re.findall('car','scary') # ['car']
+print re.findall('car','carry the barcardi to the car') # ['car','car','car']
+
+re.sub('X','Mr. Smith','attnLX\n\nDear X,\n')
+# 'attn: Mr. Smith\012\012Dear Mr. Smith,\012'
+
+re.split(':','str1:str2:str3')
+# ['str1','str2','str3']
