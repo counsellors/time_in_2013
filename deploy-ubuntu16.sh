@@ -47,7 +47,7 @@ sudo apt-get install -y sublime-text-installer
 sudo wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 
 # switch to oh-my-zsh
-chsh -s /usr/local/bin/zsh
+chsh -s /usr/bin/zsh
 
 # install pipenv
 sudo pip install pipenv
