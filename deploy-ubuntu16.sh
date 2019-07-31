@@ -18,7 +18,7 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # update
 sudo apt update 
 
-sudo apt-get install -y vim zsh subversion git curl python-pip python3-pip ipython3 wireshark
+sudo apt-get install -y vim zsh subversion git curl python-pip python3-pip ipython3 wireshark libssl-dev
 
 # set pip source
 mkdir ~/.pip
