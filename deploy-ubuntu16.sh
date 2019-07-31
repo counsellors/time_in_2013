@@ -36,6 +36,7 @@ sudo sed -i "s/from pip import main/from pip._internal import main/g" /usr/bin/p
 sudo sed -i "s/from pip import main/from pip._internal import main/g" /usr/bin/pip3
 
 pip3 install ipython
+pip3 install pyopenssl --upgrade
 
 
 # install sublime text3
