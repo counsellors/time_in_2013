@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Selector 打印</title>
+</head>
+<body>
+  <h1>CSS Selector 打印</h1>
+  <form>
+    <label for="html">HTML 文本：</label><br>
+    <textarea id="html" rows="10" cols="50"></textarea><br>
+    <label for="selector">CSS Selector：</label>
+    <input type="text" id="selector"><br>
+    <label for="format">输出格式：</label>
+    <select id="format">
+      <option value="json">JSON</option>
+      <option value="text">不带编号原始文本</option>
+      <option value="numbered">带编号的输出格式</option>
+    </select><br>
+    <button type="button" onclick="printResults()">提交</button>
+    <button type="button" onclick="fetchUrl()">Fetch URL</button><br>
+    <label for="output">输出结果：</label><br>
+    <textarea id="output" rows="10" cols="50" readonly></textarea>
+  </form>
+  <script>
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/"; // 使用 herokuapp 的 CORS 代理服务器
+    const apiUrl = "https://example.com"; // 替换成你要访问的目标网站的 URL
+
+    function printResults() {
+      const html = document.getElementById("html").value;
+      const selector = document.getElementById("selector").value;
+      const format = document.getElementById("format").value;
+      const elements = Array.from(new DOMParser().parseFromString(html, "text/html").querySelectorAll(selector));
+      let outputData = [];
+      for (let i = 0; i < elements.length; i++) {
+        const elementText = elements[i].textContent.trim();
+        if (format === "json") {
+          outputData.push({id: i + 1, text: elementText});
+        } else if (format === "text") {
+          outputData.push(elementText);
+        } else {
+          outputData.push(`[${i + 1}] ${elementText}`);
+        }
+      }
+      let outputText;
+      if (format === "json") {
+        outputText = JSON.stringify(outputData);
+      } else if (format === "text") {
+        outputText = outputData.join("\n");
+      } else {
+        outputText = outputData.join("\n\n");
+      }
+      document.getElementById("output").value = outputText;
+    }
+
+    function fetchUrl() {
+      const url = prompt("请输入要下载的 URL:");
+      if (url) {
+        fetch(proxyUrl + apiUrl + "?url=" + encodeURIComponent(url))
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById("html").value = data;
+          })
+          .catch(error => {
+            console.error(error);
+            alert("下载页面出错，请检查 URL 是否正确。");
+          });
+      }
+    }
+  </script>
+</body>
+</html>
