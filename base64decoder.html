@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Base64 编码与解码</title>
+</head>
+<body>
+  <h1>Base64 编码与解码</h1>
+  <form>
+    <label for="input">待编码/解码文本：</label><br>
+    <textarea id="input" rows="10" cols="50"></textarea><br>
+    <button type="button" onclick="encodeText()">编码</button>
+    <button type="button" onclick="decodeText()">解码</button><br>
+    <label for="output">输出结果：</label><br>
+    <textarea id="output" rows="10" cols="50" readonly></textarea>
+  </form>
+  <script>
+    function encodeText() {
+      const input = document.getElementById("input");
+      const output = document.getElementById("output");
+      const encodedText = btoa(input.value);
+      output.value = encodedText;
+    }
+
+    function decodeText() {
+      const input = document.getElementById("input");
+      const output = document.getElementById("output");
+      const decodedText = atob(input.value);
+      output.value = decodedText;
+    }
+  </script>
+</body>
+</html>
